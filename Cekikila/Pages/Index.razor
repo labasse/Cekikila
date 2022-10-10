@@ -1,9 +1,35 @@
 ﻿@page "/"
 
+@inject DbContext db
+
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<input type="text" @bind=Utilisateur @bind:event="oninput"/>
+
+<h1>Hello @Utilisateur</h1>
 
 Welcome to your new app.
 
+<ul>
+    @foreach(var obj in db.Objets) {
+        <li>@obj.Nom</li>
+    }
+</ul>
+
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+    private string _utilisateur = "Sylvain";
+
+    public string Utilisateur 
+    {
+        get => _utilisateur;
+        set 
+        {
+            _utilisateur = value;
+
+        }
+    }
+
+    private bool Maj = false; 
+}
