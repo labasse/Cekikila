@@ -21,5 +21,7 @@ namespace Cekikila
         public DateTime? Fin { get; set; }
 
         public double Valeur { get; set; } = 1.0;
+
+        public List<Tag> Tags { get; } = new ();
     }
 }
