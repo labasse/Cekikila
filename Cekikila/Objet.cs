@@ -4,10 +4,13 @@ namespace Cekikila
 {
     public class Objet
     {
-        public Objet(string nom)
+        public Objet(string nom, int? idObjet = null)
         {
             Nom = nom;
+            IdObjet = idObjet;
         }
+
+        public int? IdObjet { get; init; }
 
         public string Nom { get; set; }
 
