@@ -1,17 +1,31 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><strong>CeKiKiLa</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav  ms-auto">
+                    <a class="nav-link active" aria-current="page" href="#">Réserver</a>
+                    <a class="nav-link" href="#">Prêter</a>
+                </div>
+            </div>
         </div>
+    </nav>
 
-        <article class="content px-4">
+</header>
+<main>
             @Body
-        </article>
-    </main>
-</div>
+</main>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Haut de page</a>
+        </p>
+        <p class="mb-1">Site de partage de matériel pour les collaborateurs de l'entreprise.</p>
+    </div>
+</footer>

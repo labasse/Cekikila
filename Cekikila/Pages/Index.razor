@@ -4,11 +4,89 @@
 
 <PageTitle>Index</PageTitle>
 
-<input type="text" @bind=Utilisateur @bind:event="oninput"/>
+<section class="px-2 py-5 text-center container-fluid">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Ne l'achète pas, je l'ai !</h1>
+        </div>
+    </div>
+</section>
 
-<h1>Hello @Utilisateur</h1>
+<div class="album py-5 bg-light">
+    <div class="container">
 
-Welcome to your new app.
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/obj-1.jpg" class="card-img-top" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">Broyeur de végétaux</h5>
+                        <p class="card-text">Broyeur électrique d'une puissance de 2800W et d'un diamètre de coupe maximum de 45 mm convient parfaitement à un usage régulier.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary">Réserver</button>
+                                <button type="button" class="btn btn-sm btn-secondary">Voir dispo</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/obj-4.jpg" class="card-img-top" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">Paddle gonflable</h5>
+                        <p class="card-text">Idéal pour amener partout avec soit, les planches de paddle gonflable vous surprendront par leur rigidité une fois gonflée et leur compacité dans leur sac de rangement.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary">Réserver</button>
+                                <button type="button" class="btn btn-sm btn-secondary">Voir dispo</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/obj-3.jpg" class="card-img-top" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">Taille haies électrique</h5>
+                        <p class="card-text">Taille haies filaire idéal pour tailler de grandes haies avec facilité et en silence.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary">Réserver</button>
+                                <button type="button" class="btn btn-sm btn-secondary">Voir dispo</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="img/obj-6.jpg" class="card-img-top" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">Combinaison néoprenne T40</h5>
+                        <p class="card-text">Cette combinaison vous permettra de nager toute l'année ! Conçue en néoprène spécial pour plus de résistance pour l'enfilage et une glisse idéale !</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary">Réserver</button>
+                                <button type="button" class="btn btn-sm btn-secondary">Voir dispo</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <ul>
     @foreach(var obj in db.Objets) {
@@ -16,20 +94,6 @@ Welcome to your new app.
     }
 </ul>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
-
 @code {
-    private string _utilisateur = "Sylvain";
-
-    public string Utilisateur 
-    {
-        get => _utilisateur;
-        set 
-        {
-            _utilisateur = value;
-
-        }
-    }
-
-    private bool Maj = false; 
+    
 }
