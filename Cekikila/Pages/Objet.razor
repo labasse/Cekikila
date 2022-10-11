@@ -11,11 +11,25 @@
     else
     {
         <h3>@objet.Nom</h3>
+
+        <Periode @bind-Debut="@NouvDebut" @bind-Fin="@NouvFin" FinModifiable="false"/>
+        @if(NouvDebut < TodayOnly)
+        {
+            <div class="alert alert-danger" role="alert">
+                Date passée !
+            </div>
+        }
     }
 </div>
 
 @code {
     private Cekikila.Objet? objet = null;
+
+    private DateOnly TodayOnly => DateOnly.FromDateTime(DateTime.Today);
+
+    private DateOnly NouvDebut = DateOnly.FromDateTime(DateTime.Today);
+
+    private DateOnly NouvFin = DateOnly.FromDateTime(DateTime.Today).AddDays(5);
 
     [Parameter]
     public int? IdObjet 

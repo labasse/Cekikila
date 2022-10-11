@@ -1,0 +1,49 @@
+﻿<div class="row align-items-center">
+    <label class="col-form-label col-auto">Du </label>
+    <div class="col-auto"><input type="date" @bind="@_debut" class="form-control" /></div>
+    <label class="col-form-label col-auto"> au </label>
+    <div class="col-auto"><input type="date" @bind="@_fin" class="form-control" disabled="@(!FinModifiable)" /></div>
+    <p>Durée : @Duree</p>
+</div>
+
+@code {
+    private DateOnly _debut
+    {
+        get => Debut;
+        set 
+        {
+            var tmp = Duree;
+
+            Debut = value;
+            DebutChanged.InvokeAsync(value);
+            _fin = _debut.AddDays((int)tmp.Days);
+        }
+    }
+
+    private DateOnly _fin
+    {
+        get => Fin;
+        set
+        {
+            Fin = value < Debut ? Debut.AddDays(1) : value;
+            FinChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter]//, EditorRequired]
+    public DateOnly Debut { get; set;}
+
+    [Parameter]
+    public EventCallback<DateOnly> DebutChanged { get; set; }
+
+    [Parameter]//, EditorRequired]
+    public DateOnly Fin { get; set; }
+
+    [Parameter]
+    public EventCallback<DateOnly> FinChanged { get; set; }
+
+    [Parameter]
+    public bool FinModifiable { get; set; } = false;
+
+    public TimeSpan Duree => Fin.ToDateTime(TimeOnly.MinValue) - Debut.ToDateTime(TimeOnly.MinValue);
+}
