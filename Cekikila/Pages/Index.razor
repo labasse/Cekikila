@@ -22,28 +22,20 @@
                 @foreach(var obj in db.Objets) {
                     var tmp = i++;
                     <div class="col">
-                    <div class="card shadow-sm" 
-                        @onmouseover='e => MajAccroche(obj.Nom, tmp)' 
-                        @onmouseout ='e => MajAccroche(null)'>
-                        <img src="img/obj-@(obj.IdObjet).jpg" class="card-img-top" />
-
-                        <div class="card-body">
-                            <h5 class="card-title">@obj.Nom</h5>
+                    <Card ImageUrl='@($"img/obj-{obj.IdObjet}.jpg")' Title="@obj.Nom">
+                        <ChildContent> <!-- Facultatif si pas d'autre RenderFragment -->
                             <p class="card-text">@obj.Description</p>
                             <p class="card-text">
                                 @foreach (var tag in obj.Tags)
-                            {
+                                {
                                     <span class="badge text-bg-dark mx-1">@tag.Label</span>
-                            }
+                                }
                             </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-sm btn-primary" href="/emprunts/@obj.IdObjet">Réserver</a>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
+                        </ChildContent>
+                        <Footer>
+                                <a class="btn btn-sm btn-primary" href="/emprunts/@obj.IdObjet">Réserver</a>
+                        </Footer>
+                    </Card>
                 </div>
             }
             }
