@@ -7,7 +7,7 @@
 <section class="px-2 py-5 text-center container-fluid">
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Ne l'achète pas, je l'ai !</h1>
+            <h1 class="fw-light">@Accroche</h1>
         </div>
     </div>
 </section>
@@ -16,34 +16,49 @@
     <div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @foreach(var obj in db.Objets) {
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img src="img/obj-@(obj.IdObjet).jpg" class="card-img-top" />
+            @{
+                int i=0;
+                @foreach(var obj in db.Objets) {
+                    var tmp = i++;
+                    <div class="col">
+                    <div class="card shadow-sm" 
+                        @onmouseover='e => MajAccroche(obj.Nom, tmp)' 
+                        @onmouseout ='e => MajAccroche(null)'>
+                        <img src="img/obj-@(obj.IdObjet).jpg" class="card-img-top" />
 
-                    <div class="card-body">
-                        <h5 class="card-title">@obj.Nom</h5>
-                        <p class="card-text">@obj.Description</p>
-                        <p class="card-text">
-                            @foreach (var tag in obj.Tags)
+                        <div class="card-body">
+                            <h5 class="card-title">@obj.Nom</h5>
+                            <p class="card-text">@obj.Description</p>
+                            <p class="card-text">
+                                @foreach (var tag in obj.Tags)
                             {
-                                <span class="badge text-bg-dark mx-1">@tag.Label</span>
+                                    <span class="badge text-bg-dark mx-1">@tag.Label</span>
                             }
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a class="btn btn-sm btn-primary" href="/emprunts/@obj.IdObjet">Réserver</a>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-primary" href="/emprunts/@obj.IdObjet">Réserver</a>
+                                </div>
+                                <small class="text-muted">9 mins</small>
                             </div>
-                            <small class="text-muted">9 mins</small>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
             }
         </div>
     </div>
 </div>
 
 @code {
+    private const string AccrocheDef = "Ne l'achète pas, je l'ai !";
+
+    private string Accroche { get; set; } = AccrocheDef;
+
+    private void MajAccroche(string? nom, int n=0)
+    {
+        Accroche = nom is null ? AccrocheDef : $"N'achète pas de {nom}({n}), j'en ai un"; 
+        // Accroche = nom is null ? AccrocheDef : String.Format("N'achète pas de {0}, j'en ai un", nom); 
+    }
     // private string GetImageName(Objet o) => $"img/obj-{o.IdObjet}.jpg";
 }
