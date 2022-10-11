@@ -1,0 +1,34 @@
+﻿@page "/emprunts/{IdObjet:int?}"
+
+@inject DbContext db
+@inject NavigationManager nav
+
+<div class="container">
+    @if(objet is null)
+    {
+        <p>Chargement en cours...</p>
+    }
+    else
+    {
+        <h3>@objet.Nom</h3>
+    }
+</div>
+
+@code {
+    private Cekikila.Objet? objet = null;
+
+    [Parameter]
+    public int? IdObjet 
+    {
+        get => objet?.IdObjet;
+        set
+        {
+            objet = db.Objets.FirstOrDefault(o => o.IdObjet==value);
+            if(objet is null)
+            {
+                // Redirection en Blazor
+                nav.NavigateTo("/404", false);
+            }            
+        }
+    }
+}
