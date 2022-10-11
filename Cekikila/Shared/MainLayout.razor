@@ -1,22 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/"><strong>CeKiKiLa</strong></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav  ms-auto">
-                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Accueil</NavLink>
-                    <NavLink class="nav-link" href="/emprunts">Réserver</NavLink>
-                    <NavLink class="nav-link" href="#">Prêter</NavLink>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+    <NavMenu/>
 </header>
 <main>
             @Body
