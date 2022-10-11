@@ -1,0 +1,34 @@
+﻿@typeparam TItem
+@implements IDisposable
+
+<table class="table" summary="@Summary">
+    @if (Header is not null)
+    {
+        <tr>
+            @Header
+        </tr>
+    }
+    @foreach(var item in Items)
+    {
+        <tr>@ItemTemplate(item)</tr>
+    }
+</table>
+
+@code {
+    public void Dispose()
+    {
+       
+    }
+
+    [Parameter]
+    public string Summary { get; set; } = "Tableau";
+
+    [Parameter]
+    public RenderFragment? Header { get; set; } = null;
+
+    [Parameter]
+    public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
+
+    [Parameter]
+    public RenderFragment<TItem> ItemTemplate { get; set; } = item => @<td>@item</td>;
+}

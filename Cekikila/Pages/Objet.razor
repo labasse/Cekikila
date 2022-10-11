@@ -19,6 +19,16 @@
                 Date passée !
             </div>
         }
+        <Tableau Items="objet.Tags.OrderBy(t => t.Ordre)" Context="tag">
+            <Header>
+                <th>Id</th>
+                <th>Titre</th>
+            </Header>
+            <ItemTemplate>
+                <td>@tag.IdTag</td>
+                <td>@tag.Label</td>
+            </ItemTemplate>
+        </Tableau>
     }
 </div>
 
