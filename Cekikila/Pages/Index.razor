@@ -1,8 +1,9 @@
 ﻿@page "/"
 
 @inject DbContext db
+@inject ILogger<Index> log
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Cekikila</PageTitle>
 
 <section class="px-2 py-5 text-center container-fluid">
     <div class="row py-lg-5">
@@ -57,7 +58,8 @@
 
     private void MajAccroche(string? nom, int n=0)
     {
-        Accroche = nom is null ? AccrocheDef : $"N'achète pas de {nom}({n}), j'en ai un"; 
+        Accroche = nom is null ? AccrocheDef : $"N'achète pas de {nom}({n}), j'en ai un";
+        log.LogInformation(Accroche);
         // Accroche = nom is null ? AccrocheDef : String.Format("N'achète pas de {0}, j'en ai un", nom); 
     }
     // private string GetImageName(Objet o) => $"img/obj-{o.IdObjet}.jpg";
