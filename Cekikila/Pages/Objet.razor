@@ -1,5 +1,6 @@
 ﻿@page "/emprunts/{IdObjet:int?}"
 
+@inject HttpClient http
 @inject NavigationManager nav
 
 <div class="container">
@@ -42,17 +43,40 @@
     private DateOnly NouvFin = DateOnly.FromDateTime(DateTime.Today).AddDays(5);
 
     [Parameter]
-    public int? IdObjet 
+    public int? IdObjet { get; set; }
+
+
+    protected override async Task OnParametersSetAsync()
     {
-        get => objet?.IdObjet;
-        set
+        // TODO : Gérer l'appel à la page sans paramètre
+        if(IdObjet is not null) 
         {
-            objet = null; // TODO : remplacer db.Objets.FirstOrDefault(o => o.IdObjet==value);
-            if(objet is null)
+            var reponse = await http.GetAsync($"api/objet/{IdObjet}");
+
+            if(reponse.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 // Redirection en Blazor
                 nav.NavigateTo("/404", false);
-            }            
+            }
+            else if(reponse.IsSuccessStatusCode)
+            {
+                objet = await reponse.Content.ReadFromJsonAsync<ObjetDto>();
+            }
+            else
+            {
+                objet = null;
+                // TODO : Message d'erreur + log
+            }
         }
     }
+    /*
+     * 
+    if(objet is null)
+                {
+                nav.NavigateTo("/404", false);
+    }            
+        }
+            }
+
+    */
 }
