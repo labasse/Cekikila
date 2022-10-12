@@ -21,7 +21,7 @@
                 int i=0;
                 @foreach(var obj in db.Objets) {
                     var tmp = i++;
-                    <div class="col">
+                    <div class="col" @key="obj.IdObjet">
                     <Card ImageUrl='@($"img/obj-{obj.IdObjet}.jpg")' Title="@obj.Nom">
                         <ChildContent> <!-- Facultatif si pas d'autre RenderFragment -->
                             <p class="card-text">@obj.Description</p>

@@ -1,4 +1,4 @@
-﻿<div class="card shadow-sm">
+﻿<div class="card shadow-sm" @attributes=attr >
     @if(ImageUrl is not null)
     {
         <img src="@ImageUrl" class="card-img-top" />
@@ -12,6 +12,10 @@
     </div>
 </div>
 @code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object> attr { get; set; } = 
+        System.Collections.Immutable.ImmutableDictionary<string, object>.Empty;
+
     [Parameter]
     public string? ImageUrl { get; set; } = null;
 

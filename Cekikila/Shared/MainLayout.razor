@@ -1,11 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
-<header>
-    <NavMenu/>
-</header>
-<main>
-            @Body
-</main>
+<CascadingValue Value="themeCourant">
+    <header>
+        <NavMenu/>
+    </header>
+    <main>
+         @Body
+    </main>
+</CascadingValue>
 
 <footer class="text-muted py-5">
     <div class="container">
@@ -15,3 +17,7 @@
         <p class="mb-1">Site de partage de matériel pour les collaborateurs de l'entreprise.</p>
     </div>
 </footer>
+
+@code{
+    private Theme themeCourant = Theme.Clair;
+}

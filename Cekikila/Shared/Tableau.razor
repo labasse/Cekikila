@@ -1,7 +1,7 @@
 ﻿@typeparam TItem
 @implements IDisposable
 
-<table class="table" summary="@Summary">
+<table class='table@(courant==Theme.Clair ? "":"-dark")' summary="@Summary">
     @if (Header is not null)
     {
         <tr>
@@ -10,11 +10,14 @@
     }
     @foreach(var item in Items)
     {
-        <tr>@ItemTemplate(item)</tr>
+        <tr @key="item">@ItemTemplate(item)</tr>
     }
 </table>
 
 @code {
+    [CascadingParameter]
+    private Theme courant { get; set; }
+
     public void Dispose()
     {
        

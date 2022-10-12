@@ -12,7 +12,7 @@
     {
         <h3>@objet.Nom</h3>
 
-        <Periode @bind-Debut="@NouvDebut" @bind-Fin="@NouvFin" FinModifiable="false"/>
+        <Periode @bind-Debut="@NouvDebut" @bind-Fin="@NouvFin" FinModifiable="false" @ref="filtre"/>
         @if(NouvDebut < TodayOnly)
         {
             <div class="alert alert-danger" role="alert">
@@ -33,6 +33,7 @@
 </div>
 
 @code {
+    private Periode? filtre;
     private Cekikila.Objet? objet = null;
 
     private DateOnly TodayOnly => DateOnly.FromDateTime(DateTime.Today);

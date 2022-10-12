@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cekikila", "Cekikila\Cekikila.csproj", "{F86DBEFB-261A-48F1-B6B7-0682EB7ED852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CekikilaBack", "CekikilaBack\CekikilaBack.csproj", "{C3C96DBE-DF2F-44F2-BEF6-BA20A2CF7067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CekikilaBack", "CekikilaBack\CekikilaBack.csproj", "{C3C96DBE-DF2F-44F2-BEF6-BA20A2CF7067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
