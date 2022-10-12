@@ -1,5 +1,43 @@
-﻿<canvas @ref="leCanvas"></canvas>
+﻿@* implements IAsyncDisposable *@
+ 
+@inject IJSRuntime js
+
+<canvas @ref="leCanvas"></canvas>
 
 @code {
     private ElementReference leCanvas; // Référence du noeud de l'arbre DOM (à utiliser dans OnAfterRender(Async))
+
+    private IJSObjectReference? module;
+
+    public async ValueTask DisposeAsync()
+    {
+        if(module is not null)
+        {
+            await module.DisposeAsync();
+        }
+    }
+
+    [Parameter]
+    public IEnumerable<(double Valeur, string Rgba, string Label)> Data { get; set; } = Enumerable.Empty<(double,string,string)>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            module = await js.InvokeAsync<IJSObjectReference>("import", "https://cdn.jsdelivr.net/npm/chart.js");
+        }
+        var config = new {
+            type= "pie",
+            data= new {
+                labels = Data.Select(t => t.Label),
+                datasets = new object[]{
+                    new {
+                        data = Data.Select(t => t.Valeur),
+                        backgroundColor = Data.Select(t => $"rgba({t.Rgba})")
+                    }
+                }
+            }
+        };
+        await js.InvokeVoidAsync("newChart", leCanvas, config);
+    }
 }
