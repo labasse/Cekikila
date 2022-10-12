@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-@inject DbContext db
+@inject HttpClient http
 @inject ILogger<Index> log
 
 <PageTitle>Cekikila</PageTitle>
@@ -15,35 +15,46 @@
 
 <div class="album py-5 bg-light">
     <div class="container">
-
+        @if(Objets is null) {
+        <p>Chargement des objets...</p>
+        }
+        else {
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             @{
                 int i=0;
-                @foreach(var obj in db.Objets) {
+                    @foreach(var obj in Objets) {
                     var tmp = i++;
-                    <div class="col" @key="obj.IdObjet">
-                    <Card ImageUrl='@($"img/obj-{obj.IdObjet}.jpg")' Title="@obj.Nom">
-                        <ChildContent> <!-- Facultatif si pas d'autre RenderFragment -->
-                            <p class="card-text">@obj.Description</p>
-                            <p class="card-text">
-                                @foreach (var tag in obj.Tags)
+                        <div class="col" @key="obj.IdObjet">
+                        <Card ImageUrl='@($"img/obj-{obj.IdObjet}.jpg")' Title="@obj.Nom">
+                            <ChildContent> <!-- Facultatif si pas d'autre RenderFragment -->
+                                <p class="card-text">@obj.Description</p>
+                                <p class="card-text">
+                                    @foreach (var tag in obj.Tags)
                                 {
-                                    <span class="badge text-bg-dark mx-1">@tag.Label</span>
+                                        <span class="badge text-bg-dark mx-1">@tag</span>
                                 }
-                            </p>
-                        </ChildContent>
-                        <Footer>
-                                <a class="btn btn-sm btn-primary" href="/emprunts/@obj.IdObjet">Réserver</a>
-                        </Footer>
-                    </Card>
-                </div>
+                                </p>
+                            </ChildContent>
+                            <Footer>
+                                    <a class="btn btn-sm btn-primary" href="/emprunts/@obj.IdObjet">Réserver</a>
+                            </Footer>
+                        </Card>
+                    </div>
             }
             }
         </div>
+        }
     </div>
 </div>
 
 @code {
+    private IEnumerable<ObjetDto>? Objets = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Objets = await http.GetFromJsonAsync<ObjetDto[]>("api/objets");
+    }
+
     private const string AccrocheDef = "Ne l'achète pas, je l'ai !";
 
     private string Accroche { get; set; } = AccrocheDef;

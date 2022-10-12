@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Cekikila 
+namespace CekikilaShared.Dto
 {
-    
-    public class Objet
+
+    public class ObjetDto
     {
-        public Objet(string nom, int? idObjet = null)
+        public ObjetDto(string nom, int? idObjet = null)
         {
             Nom = nom;
             IdObjet = idObjet;
@@ -23,6 +23,6 @@ namespace Cekikila
 
         public double Valeur { get; set; } = 1.0;
 
-        public List<Tag> Tags { get; } = new ();
+        public List<string> Tags { get; init; } = new ();
     }
 }

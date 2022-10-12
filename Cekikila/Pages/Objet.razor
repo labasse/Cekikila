@@ -1,6 +1,5 @@
 ﻿@page "/emprunts/{IdObjet:int?}"
 
-@inject DbContext db
 @inject NavigationManager nav
 
 <div class="container">
@@ -19,14 +18,14 @@
                 Date passée !
             </div>
         }
-        <Tableau Items="objet.Tags.OrderBy(t => t.Ordre)" Context="tag">
+        <Tableau Items="objet.Tags" Context="tag">
             <Header>
                 <th>Id</th>
                 <th>Titre</th>
             </Header>
             <ItemTemplate>
-                <td>@tag.IdTag</td>
-                <td>@tag.Label</td>
+                <td>-</td>
+                <td>@tag</td>
             </ItemTemplate>
         </Tableau>
     }
@@ -34,7 +33,7 @@
 
 @code {
     private Periode? filtre;
-    private Cekikila.Objet? objet = null;
+    private ObjetDto? objet = null;
 
     private DateOnly TodayOnly => DateOnly.FromDateTime(DateTime.Today);
 
@@ -48,7 +47,7 @@
         get => objet?.IdObjet;
         set
         {
-            objet = db.Objets.FirstOrDefault(o => o.IdObjet==value);
+            objet = null; // TODO : remplacer db.Objets.FirstOrDefault(o => o.IdObjet==value);
             if(objet is null)
             {
                 // Redirection en Blazor
